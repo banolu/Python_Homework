@@ -1,3 +1,8 @@
+# @UNIVERSIDAD AUTONOMA DE ZACATECAS
+# @Taller Python Introduccion Anlisis de Datos
+# @Autor: Luis Rodrigo Barragan
+# 
+#
 # Ejercicio 1
 # realizar un ejemplo de operaciones y tipos
 # 
