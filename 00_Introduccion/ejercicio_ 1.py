@@ -24,7 +24,7 @@ print((8.1, 3, 4.5, 6)) #(8.1, 3, 4.5, 6)
 
 # Tipos de datos
 print(type(9 // 2))              # int
-print(type(100<50))                # bool // Buleano
+print(type(100<50))              # bool // Buleano
 print(type(3.14159))             # Float // Flotante
 print(type(1j + 1 + 1j + 1))     # Complex // Complejo
 print(type('Python'))            # String // Cadena
