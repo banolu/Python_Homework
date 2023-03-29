@@ -15,14 +15,7 @@ while condicion:
     #el código va aquí
 ```
 
-**Ejemplo:**
-
-```python
-contador = 0
-while contador < 5:
-    print(contador)
-    contador = contador + 1
-#prints from 0 to 4
+<!-- Z -->
 ```
 
 En el ciclo while anterior, la condición se vuelve falsa cuando el conteo es 5. Ahí es cuando el ciclo se detiene.
