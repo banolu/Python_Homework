@@ -1,0 +1,130 @@
+
+
+########################################################################################
+## Selección de características basada en la correlación                                 
+##...(Correlation-based feature selection)
+########################################################################################
+
+# Correlación basada en selección de características es un método de filtro 
+#para la selección de características que evalúa la correlación entre cada 
+#característica y la variable objetivo, así como la correlación entre pares de
+#características. Este método es útil cuando queremos identificar las 
+#características que están más fuertemente correlacionadas con la variable 
+#objetivo y aquellas que son redundantes entre sí.
+#
+
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the dataset
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.data'
+housing = pd.read_csv(url, sep='\s+', header=None)
+housing.columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS',
+                   'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
+
+# Compute the correlation matrix
+corr = housing.corr()
+
+# Plot the correlation matrix
+
+sns.set(font_scale=.5)
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix')
+
+# Perform feature selection based on correlation
+threshold = 0.5
+corr_features = set()
+for i in range(len(corr.columns)):
+    for j in range(i):
+        if abs(corr.iloc[i, j]) > threshold:
+            corr_features.add(corr.columns[i])
+
+print('Selected features:', list(corr_features))
+
+# Create a new dataframe with the selected features
+selected_features_df = housing[list(corr_features)]
+
+# Display the new dataframe
+print('\nNew dataframe with selected features:')
+print(selected_features_df.head())
+
+
+########################################################################################
+# Seleccion de caracteristicas bassado en chi cuadrado (chi-squared feature selection)##
+########################################################################################
+import pandas as pd
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
+from sklearn.feature_selection import f_regression
+from sklearn.linear_model import LinearRegression
+
+# Load the dataset
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.data'
+housing = pd.read_csv(url, sep='\s+', header=None)
+housing.columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS',
+                   'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
+
+# Separate features and target variable
+x = housing.iloc[:, :-1]  # features
+y = housing.iloc[:, -1]   # target variable
+
+x = x.astype("int")
+y = y.astype("int")
+
+# Apply chi-squared feature selection
+
+k = 8  # number of top features to select
+selector = SelectKBest(chi2, k=k)
+selector.fit(X, y)
+
+# Get the selected features
+selected_features = X.columns[selector.get_support()]
+
+print('Selected features:', list(selected_features))
+
+
+
+#################################################################################
+##                                                                              #
+## Selección de características de ANOVA (ANOVA Feature Selection) ##           #
+##                                                                              #
+#################################################################################
+
+
+
+import pandas as pd
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_classif
+
+# Load the dataset
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.data'
+housing = pd.read_csv(url, sep='\s+', header=None)
+housing.columns = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS',
+                   'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
+
+# Separate features and target variable
+x = housing.iloc[:, :-1]  # features
+y = housing.iloc[:, -1]   # target variable
+
+x = x.astype("int")
+y = y.astype("int")
+
+# Apply ANOVA feature selection
+
+k = 3  # number of top features to select
+selector = SelectKBest(f_classif, k=k)
+selector.fit(x, y)
+
+# Get the selected features
+selected_features = x.columns[selector.get_support()]
+
+print('Selected features:', list(selected_features))
+
+
+
+
+
+
