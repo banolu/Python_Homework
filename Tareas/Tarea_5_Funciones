@@ -1,0 +1,21 @@
+# funcion 1
+
+def printer(imprimir = "Hola Mundo"):
+        print(imprimir)
+
+
+# funcion 2
+ def saltos(n):
+        for i in range(0,n,3):
+            printer(" El conteo con saltos en intervalos de n : ",i)
+
+# funcion 3
+def conteo(n):
+        for i in range(0,n):
+            printer(" el conteo es: ",i)
+
+# funcion 4
+    
+def Inverso(n):
+        for i in range(n,0):
+            prnter(" El inverso del conteo original n es : ",i)
